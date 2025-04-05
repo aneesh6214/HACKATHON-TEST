@@ -1,2 +1,31 @@
 /Backend/.venv
 /OM1
+
+# Python
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+*.env
+*.log
+
+# Frontend
+/Frontend/node_modules
+/Frontend/.next
+/Frontend/out
+/Frontend/build
+/Frontend/.vercel
+/Frontend/*.tsbuildinfo
+/Frontend/next-env.d.ts
+/Frontend/npm-debug.log*
+/Frontend/yarn-debug.log*
+/Frontend/yarn-error.log*
+/Frontend/.pnpm-debug.log*
+
+# System files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*.bak
+*.tmp
