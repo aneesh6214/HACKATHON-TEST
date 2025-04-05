@@ -54,7 +54,7 @@ export default function Home() {
 
   return (
     <div className="flex flex-col min-h-screen bg-fixed bg-gradient-radial from-slate-900 via-blue-900 to-slate-900">
-      {/* Animated particles */}
+      {/* Animated blobs */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
         <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-blue-300 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
         <div className="absolute top-1/3 right-1/4 w-96 h-96 bg-cyan-300 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
@@ -63,90 +63,105 @@ export default function Home() {
       </div>
 
       <header className="sticky top-0 z-40 w-full border-b bg-background/80 backdrop-blur-sm">
-  <div className="container flex items-center justify-between h-14 px-4 md:px-6">
-    <Link href="/" className="flex items-center gap-2">
-      <Zap className="w-5 h-5" />
-      <span className="text-lg font-bold">WheelScore</span>
-    </Link>
-    <nav className="flex flex-nowrap justify-end gap-12">
-      <Link
-        href="#welcome"
-        className="text-sm font-medium transition-colors hover:text-primary relative group"
-        onClick={(e) => scrollToSection(e, "welcome")}
-      >
-        Welcome
-        <span
-          className="absolute left-0 right-0 bottom-0 h-0.5 bg-primary transform scale-x-0 group-[.active]:scale-x-100 transition-transform"
-          data-section="welcome"
-        ></span>
-      </Link>
-      <Link
-        href="#features"
-        className="text-sm font-medium transition-colors hover:text-primary relative group"
-        onClick={(e) => scrollToSection(e, "features")}
-      >
-        Features
-        <span
-          className="absolute left-0 right-0 bottom-0 h-0.5 bg-primary transform scale-x-0 group-[.active]:scale-x-100 transition-transform"
-          data-section="features"
-        ></span>
-      </Link>
-      <Link
-        href="#about"
-        className="text-sm font-medium transition-colors hover:text-primary relative group"
-        onClick={(e) => scrollToSection(e, "about")}
-      >
-        About
-        <span
-          className="absolute left-0 right-0 bottom-0 h-0.5 bg-primary transform scale-x-0 group-[.active]:scale-x-100 transition-transform"
-          data-section="about"
-        ></span>
-      </Link>
-    </nav>
-  </div>
-</header>
-
+        <div className="container flex items-center justify-between h-14 px-4 md:px-6">
+          <Link href="/" className="flex items-center gap-2">
+            <Zap className="w-5 h-5" />
+            <span className="text-lg font-bold">WheelScore</span>
+          </Link>
+          <nav className="flex flex-nowrap justify-end gap-12">
+            <Link
+              href="#welcome"
+              className="text-sm font-medium transition-colors hover:text-primary relative group"
+              onClick={(e) => scrollToSection(e, "welcome")}
+            >
+              Welcome
+              <span
+                className="absolute left-0 right-0 bottom-0 h-0.5 bg-primary transform scale-x-0 group-[.active]:scale-x-100 transition-transform"
+                data-section="welcome"
+              ></span>
+            </Link>
+            <Link
+              href="#features"
+              className="text-sm font-medium transition-colors hover:text-primary relative group"
+              onClick={(e) => scrollToSection(e, "features")}
+            >
+              Features
+              <span
+                className="absolute left-0 right-0 bottom-0 h-0.5 bg-primary transform scale-x-0 group-[.active]:scale-x-100 transition-transform"
+                data-section="features"
+              ></span>
+            </Link>
+            <Link
+              href="#about"
+              className="text-sm font-medium transition-colors hover:text-primary relative group"
+              onClick={(e) => scrollToSection(e, "about")}
+            >
+              About
+              <span
+                className="absolute left-0 right-0 bottom-0 h-0.5 bg-primary transform scale-x-0 group-[.active]:scale-x-100 transition-transform"
+                data-section="about"
+              ></span>
+            </Link>
+          </nav>
+        </div>
+      </header>
 
       <main className="flex-1 relative z-10">
-
         {/* WELCOME / HERO SECTION */}
-<section
-  id="welcome"
-  className="relative flex items-center justify-center w-full h-screen"
->
-  <div className="container flex flex-col gap-6 px-4 md:px-6 items-center justify-center text-center transform -translate-y-10">
-    <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl lg:text-6xl xl:text-[3.75rem] leading-tight">
-      Powering the Future of Technology
-    </h1>
-    <p className="max-w-[600px] text-base text-muted-foreground md:text-lg lg:text-xl">
-      Innovative solutions that transform businesses and drive growth in the digital age.
-    </p>
-    <div className="flex flex-col gap-2 min-[400px]:flex-row">
-      <Link href="/upload">
-        <Button size="lg" className="inline-flex items-center gap-2">
-          Upload your environment / device
-        </Button>
-      </Link>
-      <Button size="lg" variant="outline">
-        Learn More
-      </Button>
-    </div>
-    <div className="flex items-center justify-center mt-8">
-      <img
-        alt="Hero"
-        className="aspect-video max-w-full h-auto rounded-xl object-cover object-center shadow-lg"
-        src="/placeholder.svg"
-      />
-    </div>
-  </div>
-</section>
+        <section
+          id="welcome"
+          // Changed from h-screen -> remove forced height, add vertical padding
+          className="relative flex items-center justify-center w-full py-20"
+        >
+          <div
+            // Add negative translate only at md breakpoint
+            className="container flex flex-col gap-6 px-4 md:px-6 items-center justify-center text-center md:-translate-y-10"
+          >
+            <h1 className="
+              text-5xl      
+              sm:text-5xl   
+              md:text-4xl
+              font-bold
+              leading-tight">
+              Powering the Future of Technology
+            </h1>
+
+            <p className="max-w-[600px] text-base text-muted-foreground md:text-lg lg:text-xl">
+              Innovative solutions that transform businesses and drive growth in the digital age.
+            </p>
+            <div className="flex flex-col gap-2 min-[400px]:flex-row">
+              <Link href="/upload">
+                <Button size="lg" className="inline-flex items-center gap-2">
+                  Upload your environment / device
+                </Button>
+              </Link>
+              <Button size="lg" variant="outline">
+                Learn More
+              </Button>
+            </div>
+            <div className="flex items-center justify-center mt-8">
+              {/* Wrap image in a max-w container for small screens */}
+              <div className="mx-auto max-w-xl">
+                <img
+                  alt="Hero"
+                  className="aspect-video w-full h-auto rounded-xl object-cover object-center shadow-lg"
+                  src="/placeholder.svg"
+                />
+              </div>
+            </div>
+          </div>
+        </section>
 
         {/* FEATURES SECTION */}
         <section
           id="features"
-          className="relative flex items-center justify-center w-full h-screen bg-black/10 backdrop-blur-sm"
+          // Remove h-screen, apply min-h to keep some height but still flexible
+          className="relative flex items-center justify-center w-full min-h-screen bg-black/10 backdrop-blur-sm py-20"
         >
-          <div className="container flex flex-col items-center justify-center px-4 md:px-6 text-center -translate-y-24">
+          <div
+            // Negative translate only at md
+            className="container flex flex-col items-center justify-center px-4 md:px-6 text-center md:-translate-y-24"
+          >
             <div className="space-y-2 mb-8">
               <div className="inline-block rounded-lg bg-muted px-3 py-1 text-sm">
                 Features
@@ -158,7 +173,8 @@ export default function Home() {
                 Discover how to get the most out of our website with these helpful navigation tips.
               </p>
             </div>
-            <div className="mx-auto grid max-w-5xl grid-cols-1 gap-6 md:grid-cols-3">
+            {/* More responsive grid: 1 -> 2 -> 3 columns */}
+            <div className="mx-auto grid max-w-5xl grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
               <div className="flex flex-col items-center space-y-4 rounded-lg border p-6 bg-card/30 backdrop-blur-sm shadow-lg hover:shadow-xl transition-all">
                 <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">
                   <Layers className="h-8 w-8 text-primary" />
@@ -191,43 +207,46 @@ export default function Home() {
         </section>
 
         {/* ABOUT SECTION */}
-<section
-  id="about"
-  className="relative flex items-center justify-center w-full h-screen"
->
-  <div className="container flex flex-col items-center justify-center px-4 md:px-6 text-center gap-6 transform -translate-y-10">
-    <div className="space-y-2">
-      <div className="inline-block rounded-lg bg-muted px-3 py-1 text-sm">
-        About Us
-      </div>
-      <h2 className="text-3xl font-bold tracking-tighter md:text-4xl">
-        Our Story
-      </h2>
-      <p className="max-w-[600px] mx-auto text-muted-foreground md:text-lg lg:text-xl">
-        Founded in 2010, WheelScore has grown from a small startup to a global technology leader
-        with offices in over 30 countries.
-      </p>
-    </div>
-    <div className="space-y-2 max-w-[600px] mx-auto">
-      <p className="text-muted-foreground">
-        Our mission is to empower businesses with innovative technology solutions that drive
-        growth and transformation in the digital age.
-      </p>
-      <p className="text-muted-foreground">
-        With over 5,000 employees worldwide, we&apos;re committed to pushing the boundaries of
-        what&apos;s possible in technology.
-      </p>
-    </div>
-    <div className="flex items-center justify-center mt-8">
-      <img
-        alt="About Us"
-        className="aspect-video max-w-full h-auto rounded-xl object-cover object-center shadow-lg"
-        src="/placeholder.svg"
-      />
-    </div>
-  </div>
-</section>
-
+        <section
+          id="about"
+          // Remove h-screen, just use py-20
+          className="relative flex items-center justify-center w-full py-20"
+        >
+          <div
+            // Negative translate only at md
+            className="container flex flex-col items-center justify-center px-4 md:px-6 text-center gap-6 md:-translate-y-10"
+          >
+            <div className="space-y-2">
+              <div className="inline-block rounded-lg bg-muted px-3 py-1 text-sm">
+                About Us
+              </div>
+              <h2 className="text-3xl font-bold tracking-tighter md:text-4xl">
+                Our Story
+              </h2>
+              <p className="max-w-[600px] mx-auto text-muted-foreground md:text-lg lg:text-xl">
+                Founded in 2010, WheelScore has grown from a small startup to a global technology leader
+                with offices in over 30 countries.
+              </p>
+            </div>
+            <div className="space-y-2 max-w-[600px] mx-auto">
+              <p className="text-muted-foreground">
+                Our mission is to empower businesses with innovative technology solutions that drive
+                growth and transformation in the digital age.
+              </p>
+              
+            </div>
+            <div className="flex items-center justify-center mt-8">
+              {/* Wrap image in a container for small screens */}
+              <div className="mx-auto max-w-xl">
+                <img
+                  alt="About Us"
+                  className="aspect-video w-full h-auto rounded-xl object-cover object-center shadow-lg"
+                  src="/placeholder.svg"
+                />
+              </div>
+            </div>
+          </div>
+        </section>
       </main>
 
       <footer className="w-full border-t py-6 md:py-0 relative z-10 bg-background/80 backdrop-blur-sm">
