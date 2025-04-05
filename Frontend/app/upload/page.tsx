@@ -158,7 +158,7 @@ export default function UploadPage() {
   const canProceed = envFileUploaded && deviceFileUploaded && deviceType !== ""
 
   return (
-    <div className="flex flex-col min-h-screen bg-fixed bg-gradient-radial from-slate-900 via-blue-900 to-slate-900">
+    <div className="flex flex-col h-screen overflow-hidden bg-fixed bg-gradient-radial from-slate-900 via-blue-900 to-slate-900">
       {/* Animated particles */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
         <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-blue-300 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
@@ -209,7 +209,7 @@ export default function UploadPage() {
                       <Building className="h-5 w-5" />
                       Environment Upload
                     </CardTitle>
-                    <CardDescription>Upload a 3D model of the environment you want to analyze</CardDescription>
+                    <CardDescription>Upload a 3D model of your environment</CardDescription>
                   </CardHeader>
                   <CardContent>
                     {!envFileUploaded ? (

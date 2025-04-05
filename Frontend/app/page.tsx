@@ -41,7 +41,7 @@ export default function Home() {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
-  const scrollToSection = (e, sectionId) => {
+  const scrollToSection = (e: React.MouseEvent, sectionId: string) => {
     e.preventDefault()
     const section = document.getElementById(sectionId)
     if (section) {
@@ -63,101 +63,102 @@ export default function Home() {
       </div>
 
       <header className="sticky top-0 z-40 w-full border-b bg-background/80 backdrop-blur-sm">
-        <div className="container flex items-center h-14 px-4 md:px-6">
-          <Link href="/" className="flex items-center gap-2">
-            <Zap className="w-5 h-5" />
-            <span className="text-lg font-bold">WheelScore</span>
-          </Link>
-          <nav className="hidden md:flex justify-center flex-1 gap-12">
-            <Link
-              href="#welcome"
-              className="text-sm font-medium transition-colors hover:text-primary relative group"
-              onClick={(e) => scrollToSection(e, "welcome")}
-            >
-              Welcome
-              <span
-                className="absolute left-0 right-0 bottom-0 h-0.5 bg-primary transform scale-x-0 group-[.active]:scale-x-100 transition-transform"
-                data-section="welcome"
-              ></span>
-            </Link>
-            <Link
-              href="#features"
-              className="text-sm font-medium transition-colors hover:text-primary relative group"
-              onClick={(e) => scrollToSection(e, "features")}
-            >
-              Features
-              <span
-                className="absolute left-0 right-0 bottom-0 h-0.5 bg-primary transform scale-x-0 group-[.active]:scale-x-100 transition-transform"
-                data-section="features"
-              ></span>
-            </Link>
-            <Link
-              href="#about"
-              className="text-sm font-medium transition-colors hover:text-primary relative group"
-              onClick={(e) => scrollToSection(e, "about")}
-            >
-              About
-              <span
-                className="absolute left-0 right-0 bottom-0 h-0.5 bg-primary transform scale-x-0 group-[.active]:scale-x-100 transition-transform"
-                data-section="about"
-              ></span>
-            </Link>
-          </nav>
-        </div>
-      </header>
-      <main className="flex-1 relative z-10">
-        <section id="welcome" className="w-full h-[650px] md:h-[650px] lg:h-[650px] pt-32">
-          <div className="container px-4 md:px-6">
-            <div className="grid gap-6 lg:grid-cols-2 lg:gap-12 xl:grid-cols-2">
-              <div className="flex flex-col justify-center space-y-4">
-                <div className="space-y-2">
-                  <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none">
-                    Powering the Future of Technology
-                  </h1>
-                  <p className="max-w-[600px] text-muted-foreground md:text-xl">
-                    Innovative solutions that transform businesses and drive growth in the digital age.
-                  </p>
-                </div>
-                <div className="flex flex-col gap-2 min-[400px]:flex-row">
-                  <Link href="/upload">
-                    <Button size="lg" className="inline-flex items-center gap-2">
-                      Upload your environment / device
-                      <ChevronRight className="h-4 w-4" />
-                    </Button>
-                  </Link>
-                  <Button size="lg" variant="outline">
-                    Learn More
-                  </Button>
-                </div>
-              </div>
-              <div className="flex items-center justify-center">
-                <img
-                  alt="Hero"
-                  className="aspect-video overflow-hidden rounded-xl object-cover object-center shadow-lg"
-                  height="400"
-                  src="/placeholder.svg?height=550&width=800"
-                  width="800"
-                />
-              </div>
-            </div>
-          </div>
-        </section>
-        <section
-  id="features"
-  className="w-full min-h-[500px] pt-12 pb-24 md:min-h-[600px] lg:min-h-[700px] bg-black/10 backdrop-blur-sm"
->
+  <div className="container flex items-center justify-between h-14 px-4 md:px-6">
+    <Link href="/" className="flex items-center gap-2">
+      <Zap className="w-5 h-5" />
+      <span className="text-lg font-bold">WheelScore</span>
+    </Link>
+    <nav className="flex flex-nowrap justify-end gap-12">
+      <Link
+        href="#welcome"
+        className="text-sm font-medium transition-colors hover:text-primary relative group"
+        onClick={(e) => scrollToSection(e, "welcome")}
+      >
+        Welcome
+        <span
+          className="absolute left-0 right-0 bottom-0 h-0.5 bg-primary transform scale-x-0 group-[.active]:scale-x-100 transition-transform"
+          data-section="welcome"
+        ></span>
+      </Link>
+      <Link
+        href="#features"
+        className="text-sm font-medium transition-colors hover:text-primary relative group"
+        onClick={(e) => scrollToSection(e, "features")}
+      >
+        Features
+        <span
+          className="absolute left-0 right-0 bottom-0 h-0.5 bg-primary transform scale-x-0 group-[.active]:scale-x-100 transition-transform"
+          data-section="features"
+        ></span>
+      </Link>
+      <Link
+        href="#about"
+        className="text-sm font-medium transition-colors hover:text-primary relative group"
+        onClick={(e) => scrollToSection(e, "about")}
+      >
+        About
+        <span
+          className="absolute left-0 right-0 bottom-0 h-0.5 bg-primary transform scale-x-0 group-[.active]:scale-x-100 transition-transform"
+          data-section="about"
+        ></span>
+      </Link>
+    </nav>
+  </div>
+</header>
 
-          <div className="container px-4 md:px-6">
-            <div className="flex flex-col items-center justify-center space-y-4 text-center">
-              <div className="space-y-2">
-                <div className="inline-block rounded-lg bg-muted px-3 py-1 text-sm">Features</div>
-                <h2 className="text-3xl font-bold tracking-tighter md:text-4xl">How to Navigate</h2>
-                <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                  Discover how to get the most out of our website with these helpful navigation tips.
-                </p>
+
+      <main className="flex-1 relative z-10">
+
+        {/* WELCOME / HERO SECTION */}
+<section
+  id="welcome"
+  className="relative flex items-center justify-center w-full h-screen"
+>
+  <div className="container flex flex-col gap-6 px-4 md:px-6 items-center justify-center text-center transform -translate-y-10">
+    <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl lg:text-6xl xl:text-[3.75rem] leading-tight">
+      Powering the Future of Technology
+    </h1>
+    <p className="max-w-[600px] text-base text-muted-foreground md:text-lg lg:text-xl">
+      Innovative solutions that transform businesses and drive growth in the digital age.
+    </p>
+    <div className="flex flex-col gap-2 min-[400px]:flex-row">
+      <Link href="/upload">
+        <Button size="lg" className="inline-flex items-center gap-2">
+          Upload your environment / device
+        </Button>
+      </Link>
+      <Button size="lg" variant="outline">
+        Learn More
+      </Button>
+    </div>
+    <div className="flex items-center justify-center mt-8">
+      <img
+        alt="Hero"
+        className="aspect-video max-w-full h-auto rounded-xl object-cover object-center shadow-lg"
+        src="/placeholder.svg"
+      />
+    </div>
+  </div>
+</section>
+
+        {/* FEATURES SECTION */}
+        <section
+          id="features"
+          className="relative flex items-center justify-center w-full h-screen bg-black/10 backdrop-blur-sm"
+        >
+          <div className="container flex flex-col items-center justify-center px-4 md:px-6 text-center -translate-y-24">
+            <div className="space-y-2 mb-8">
+              <div className="inline-block rounded-lg bg-muted px-3 py-1 text-sm">
+                Features
               </div>
+              <h2 className="text-3xl font-bold tracking-tighter md:text-4xl">
+                How to Navigate
+              </h2>
+              <p className="mx-auto max-w-[900px] text-muted-foreground md:text-lg lg:text-xl">
+                Discover how to get the most out of our website with these helpful navigation tips.
+              </p>
             </div>
-            <div className="mx-auto grid max-w-5xl grid-cols-1 gap-6 py-8 md:grid-cols-3">
+            <div className="mx-auto grid max-w-5xl grid-cols-1 gap-6 md:grid-cols-3">
               <div className="flex flex-col items-center space-y-4 rounded-lg border p-6 bg-card/30 backdrop-blur-sm shadow-lg hover:shadow-xl transition-all">
                 <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">
                   <Layers className="h-8 w-8 text-primary" />
@@ -188,42 +189,47 @@ export default function Home() {
             </div>
           </div>
         </section>
-        <section id="about" className="w-full h-[550px] md:h-[550px] lg:h-[550px] py-0 pt-0 md:py-16 lg:py-32">
-        <div className="container px-4 md:px-6">
-            <div className="grid gap-6 lg:grid-cols-2 lg:gap-12">
-            <div className="flex flex-col justify-start space-y-4 mt-4">
-            <div className="space-y-2">
-                  <div className="inline-block rounded-lg bg-muted px-3 py-1 text-sm">About Us</div>
-                  <h2 className="text-3xl font-bold tracking-tighter md:text-4xl">Our Story</h2>
-                  <p className="max-w-[600px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                    Founded in 2010, WheelScore has grown from a small startup to a global technology leader with
-                    offices in over 30 countries.
-                  </p>
-                </div>
-                <div className="space-y-2">
-                  <p className="max-w-[600px] text-muted-foreground">
-                    Our mission is to empower businesses with innovative technology solutions that drive growth and
-                    transformation in the digital age.
-                  </p>
-                  <p className="max-w-[600px] text-muted-foreground">
-                    With over 5,000 employees worldwide, we're committed to pushing the boundaries of what's possible in
-                    technology.
-                  </p>
-                </div>
-              </div>
-              <div className="flex items-center justify-center">
-                <img
-                  alt="About Us"
-                  className="aspect-video overflow-hidden rounded-xl object-cover object-center shadow-lg"
-                  height="550"
-                  src="/placeholder.svg?height=550&width=800"
-                  width="800"
-                />
-              </div>
-            </div>
-          </div>
-        </section>
+
+        {/* ABOUT SECTION */}
+<section
+  id="about"
+  className="relative flex items-center justify-center w-full h-screen"
+>
+  <div className="container flex flex-col items-center justify-center px-4 md:px-6 text-center gap-6 transform -translate-y-10">
+    <div className="space-y-2">
+      <div className="inline-block rounded-lg bg-muted px-3 py-1 text-sm">
+        About Us
+      </div>
+      <h2 className="text-3xl font-bold tracking-tighter md:text-4xl">
+        Our Story
+      </h2>
+      <p className="max-w-[600px] mx-auto text-muted-foreground md:text-lg lg:text-xl">
+        Founded in 2010, WheelScore has grown from a small startup to a global technology leader
+        with offices in over 30 countries.
+      </p>
+    </div>
+    <div className="space-y-2 max-w-[600px] mx-auto">
+      <p className="text-muted-foreground">
+        Our mission is to empower businesses with innovative technology solutions that drive
+        growth and transformation in the digital age.
+      </p>
+      <p className="text-muted-foreground">
+        With over 5,000 employees worldwide, we&apos;re committed to pushing the boundaries of
+        what&apos;s possible in technology.
+      </p>
+    </div>
+    <div className="flex items-center justify-center mt-8">
+      <img
+        alt="About Us"
+        className="aspect-video max-w-full h-auto rounded-xl object-cover object-center shadow-lg"
+        src="/placeholder.svg"
+      />
+    </div>
+  </div>
+</section>
+
       </main>
+
       <footer className="w-full border-t py-6 md:py-0 relative z-10 bg-background/80 backdrop-blur-sm">
         <div className="container flex flex-col items-center justify-between gap-4 md:h-24 md:flex-row">
           <p className="text-center text-sm leading-loose text-muted-foreground md:text-left">
@@ -242,4 +248,3 @@ export default function Home() {
     </div>
   )
 }
-
