@@ -1,1 +1,5 @@
--e ../OM1
+flask
+werkzeug
+google-genai
+python-dotenv
+Pillow

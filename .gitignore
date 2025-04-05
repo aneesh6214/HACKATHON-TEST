@@ -1,5 +1,6 @@
 /Backend/.venv
 /OM1
+.venv
 
 # Python
 *.pyc
