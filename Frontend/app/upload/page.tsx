@@ -19,6 +19,7 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Label } from "@/components/ui/label"
+import { access } from "fs"
 
 export default function UploadPage() {
   // Environment file state
@@ -36,6 +37,8 @@ export default function UploadPage() {
   const [deviceFileError, setDeviceFileError] = useState("")
   const [deviceType, setDeviceType] = useState("")
   const deviceInputRef = useRef<HTMLInputElement>(null)
+
+  const [results, setResults] = useState<accessibilityScore | null>(null)
 
   const validateFile = (file: File) => {
     const validTypes = [".stl", ".cad", "model/stl", "application/octet-stream"]
@@ -84,6 +87,7 @@ export default function UploadPage() {
       setEnvFileName(file.name)
       setEnvFileUploaded(true)
       setEnvFileObj(file)
+      setC
       console.log("Environment file ready for upload:", file)
     } else {
       setEnvFileError("Please upload a valid .STL or .CAD file")
@@ -158,7 +162,24 @@ export default function UploadPage() {
     setDeviceType("")
   }
 
-  const canProceed = envFileUploaded && deviceFileUploaded && deviceType !== ""
+  type accessibilityScore = {
+    score: number
+    description: string
+  };
+
+  const processFiles = (envFileObj) => {
+
+    if (envFileObj) {
+
+
+      const apicall = fetch("http://127.0.0.1:5000/upload")
+      .then((response) => response.json()).then((json: accessibilityScore) => setResults(json));
+      
+      console.log("API call response:", apicall)
+
+    }
+
+  const canProceed = envFileUploaded
 
   return (
     <div className="flex flex-col min-h-screen bg-fixed bg-gradient-radial from-slate-900 via-blue-900 to-slate-900">
@@ -290,9 +311,9 @@ export default function UploadPage() {
 
               <div className="flex justify-end mt-8 gap-4">
                 <Button variant="outline" onClick={resetAll}>
-                  Reset
+                  Clear file
                 </Button>
-                <Button disabled={!canProceed}>Process Files</Button>
+                <Button onClick={processFiles} disabled={!canProceed}>Process Files</Button>
               </div>
             </TabsContent>
             <TabsContent value="results">
@@ -365,4 +386,5 @@ export default function UploadPage() {
       </footer>
     </div>
   )
+}
 }
