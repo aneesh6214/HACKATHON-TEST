@@ -177,7 +177,7 @@ export default function Home() {
                 </div>
                 <h3 className="text-xl font-bold">Learn About Us</h3>
                 <p className="text-center text-muted-foreground">
-                  Visit our About section to learn more about our company history and mission.
+                  Scroll down to our about section to learn about our team of 3 developers- and our inspiration.
                 </p>
               </div>
               <div className="flex flex-col items-center space-y-4 rounded-lg border p-6 bg-card/30 backdrop-blur-sm shadow-lg hover:shadow-xl transition-all">
@@ -207,18 +207,18 @@ export default function Home() {
                     Our Story
                   </h2>
                   <p className="max-w-[600px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                    Founded in 2010, WheelScore has grown from a small startup to a global technology leader with
-                    offices in over 30 countries.
+                    Meet Us: Aneesh Kumar, Derek Ye, Yaseen Alkhameri - a team of 3 third year undergraduate students based in San Francisco.
+
                   </p>
                 </div>
                 <div className="space-y-2">
                   <p className="max-w-[600px] text-muted-foreground">
-                    Our mission is to empower businesses with innovative technology solutions that drive growth and
-                    transformation in the digital age.
+                    We started building this project for SF Hacks 2025. We wanted to focus on a tool that would help 
+                    increase accessibility in public spaces.
                   </p>
                   <p className="max-w-[600px] text-muted-foreground">
-                    With over 5,000 employees worldwide, we're committed to pushing the boundaries of what's possible in
-                    technology.
+                    We wanted to create a tool that could actually impact an industry and change the way
+                    we think about accessibility in the world around us. A standardized metric for accessibility would be a step in the right direction.
                   </p>
                 </div>
               </div>
