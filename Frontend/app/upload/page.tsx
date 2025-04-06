@@ -41,7 +41,7 @@ export default function UploadPage() {
   const [results, setResults] = useState<accessibilityScore | null>(null)
 
   const validateFile = (file: File) => {
-    const validTypes = [".stl", ".cad", "model/stl", "application/octet-stream"]
+    const validTypes = [".stl", ".cad", ".img", ".jpg", "model/stl", "application/octet-stream"]
     const fileExtension = file.name.substring(file.name.lastIndexOf(".")).toLowerCase()
 
     if (validTypes.includes(file.type) || validTypes.includes(fileExtension)) {
@@ -87,7 +87,6 @@ export default function UploadPage() {
       setEnvFileName(file.name)
       setEnvFileUploaded(true)
       setEnvFileObj(file)
-      setC
       console.log("Environment file ready for upload:", file)
     } else {
       setEnvFileError("Please upload a valid .STL or .CAD file")
@@ -171,13 +170,20 @@ export default function UploadPage() {
 
     if (envFileObj) {
 
+      const FormData = new FormData()
+      FormData.append("file", envFileObj) 
 
-      const apicall = fetch("http://127.0.0.1:5000/upload")
+      const apicall = fetch("http://127.0.0.1:5000/upload", {
+        method: "POST",
+        body: FormData, 
+
+      })
       .then((response) => response.json()).then((json: accessibilityScore) => setResults(json));
       
       console.log("API call response:", apicall)
 
     }
+  }
 
   const canProceed = envFileUploaded
 
@@ -386,5 +392,4 @@ export default function UploadPage() {
       </footer>
     </div>
   )
-}
 }
