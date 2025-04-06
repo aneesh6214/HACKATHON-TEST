@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { ChevronRight, Globe, Layers, Shield, Zap } from "lucide-react"
+import { Globe, Layers, Shield, Zap } from "lucide-react"
 import { useEffect } from "react"
 
 export default function Home() {
@@ -108,7 +108,6 @@ export default function Home() {
 
       <main className="flex-1 relative z-10">
         {/* Welcome Section */}
-        {/* <section id="welcome" className="w-full h-[650px] md:h-[650px] lg:h-[650px] pt-32"> */}
         <section id="welcome" className="w-full h-screen pt-32">
           <div className="container px-4 md:px-6">
             <div className="grid gap-6 lg:grid-cols-2 lg:gap-12 xl:grid-cols-2">
@@ -146,14 +145,7 @@ export default function Home() {
         </section>
 
         {/* Features Section */}
-        {/* <section
-          id="features"
-          className="w-full min-h-[500px] pt-8 pb-24 md:min-h-[600px] lg:min-h-[700px] bg-black/10 backdrop-blur-sm"
-        > */}
-        <section
-          id="features"
-          className="w-full h-screen pt-8 pb-24 bg-black/10 backdrop-blur-sm"
-        >
+        <section id="features" className="w-full h-screen pt-8 pb-24 bg-black/10 backdrop-blur-sm">
           <div className="container px-4 md:px-6">
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
               <div className="space-y-2">
@@ -199,14 +191,7 @@ export default function Home() {
         </section>
 
         {/* About Section */}
-        {/* <section
-          id="about"
-          className="w-full min-h-[550px] md:h-[550px] lg:h-[550px] py-0 pt-0 md:py-16 lg:py-32"
-        > */}
-        <section
-          id="about"
-          className="w-full h-screen py-0 pt-0 md:py-16 lg:py-32"
-        >
+        <section id="about" className="w-full h-screen py-0 pt-0 md:py-16 lg:py-32">
           <div className="container px-4 md:px-6">
             <div className="grid gap-6 lg:grid-cols-2 lg:gap-12">
               {/* Text content with negative margin to move up */}
@@ -240,7 +225,7 @@ export default function Home() {
                   alt="About Us"
                   className="aspect-video overflow-hidden rounded-xl object-cover object-center shadow-lg"
                   height="550"
-                  src="/placeholder.svg?height=550&width=800"
+                  src="/about-us.JPG"
                   width="800"
                 />
               </div>

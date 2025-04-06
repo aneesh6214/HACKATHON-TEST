@@ -1,8 +1,6 @@
 "use client"
 
-import type React from "react"
-
-import { useState, useRef } from "react"
+import React, { useState, useRef } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
@@ -13,13 +11,11 @@ import {
   ArrowLeft,
   CheckCircle2,
   AlertCircle,
-  Building,
-  ShipWheelIcon as Wheelchair,
+  Building
 } from "lucide-react"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Label } from "@/components/ui/label"
-import { access } from "fs"
+import Loader from "../loader"
 
 export default function UploadPage() {
   // Environment file state
@@ -39,9 +35,12 @@ export default function UploadPage() {
   const deviceInputRef = useRef<HTMLInputElement>(null)
 
   const [results, setResults] = useState<accessibilityScore | null>(null)
+  const [tabValue, setTabValue] = useState("upload")
+
+  const [isLoading, setIsLoading] = useState(false)
 
   const validateFile = (file: File) => {
-    const validTypes = [".stl", ".cad", ".img", ".jpg", "model/stl", "application/octet-stream"]
+    const validTypes = [".stl", ".cad", ".img", ".jpg", ".png", ".jpeg", "model/stl", "application/octet-stream"]
     const fileExtension = file.name.substring(file.name.lastIndexOf(".")).toLowerCase()
 
     if (validTypes.includes(file.type) || validTypes.includes(fileExtension)) {
@@ -89,7 +88,7 @@ export default function UploadPage() {
       setEnvFileObj(file)
       console.log("Environment file ready for upload:", file)
     } else {
-      setEnvFileError("Please upload a valid .STL or .CAD file")
+      setEnvFileError("Please upload a valid file.")
     }
   }
 
@@ -166,22 +165,32 @@ export default function UploadPage() {
     description: string
   };
 
-  const processFiles = (envFileObj) => {
-
+  const processFiles = () => {
     if (envFileObj) {
-
-      const FormData = new FormData()
-      FormData.append("file", envFileObj) 
-
-      const apicall = fetch("http://127.0.0.1:5000/upload", {
+      setIsLoading(true);
+      const formData = new FormData();
+      formData.append("file", envFileObj);
+      fetch("http://127.0.0.1:5000/upload", {
         method: "POST",
-        body: FormData, 
-
+        body: formData,
       })
-      .then((response) => response.json()).then((json: accessibilityScore) => setResults(json));
-      
-      console.log("API call response:", apicall)
-
+        .then((response) => response.json())
+        .then((json: accessibilityScore) => {
+          setTimeout(() => {
+            setResults(json);
+            setIsLoading(false);
+            setTimeout(() => {
+              setTabValue("results");
+            }, 100);
+          }, 2000);
+        })
+        .catch((error) => {
+          console.error("Error calling API", error);
+          setTimeout(() => {
+            setIsLoading(false);
+          }, 500);
+        });
+      console.log("API call triggered");
     }
   }
 
@@ -217,13 +226,13 @@ export default function UploadPage() {
       <main className="flex-1 relative z-10">
         <div className="container max-w-4xl mx-auto px-4 py-8 md:py-16">
           <div className="text-center mb-8">
-            <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Upload Your Files</h1>
+            <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">{tabValue === "results" ? "Results" : "Upload Your Files"}</h1>
             <p className="mt-4 text-muted-foreground md:text-xl max-w-2xl mx-auto">
-              Upload your environment as an STL file or a picture to get started with WheelScore's accessibility analysis.
+              {tabValue === "results" ? "Your environment has been analyzed and a score has been computed based on wheelchair accessibility." : "Upload your environment as an STL file or a picture to get started with WheelScore's accessibility analysis."}
             </p>
           </div>
 
-          <Tabs defaultValue="upload" className="w-full">
+          <Tabs value={tabValue} onValueChange={setTabValue} className="w-full">
             <TabsList className="grid w-full grid-cols-2 mb-8">
               <TabsTrigger value="upload">Upload Files</TabsTrigger>
               <TabsTrigger value="results" disabled={!canProceed}>
@@ -233,6 +242,8 @@ export default function UploadPage() {
             <TabsContent value="upload">
               <div className="grid gap-8">
                 {/* Environment Upload */}
+
+
                 <Card className="w-full bg-card/30 backdrop-blur-sm border shadow-lg">
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2">
@@ -313,6 +324,8 @@ export default function UploadPage() {
                     )}
                   </CardContent>
                 </Card>
+
+
               </div>
 
               <div className="flex justify-end mt-8 gap-4">
@@ -325,19 +338,15 @@ export default function UploadPage() {
             <TabsContent value="results">
               <Card className="bg-card/30 backdrop-blur-sm border shadow-lg">
                 <CardHeader>
-                  <CardTitle>Analysis Results</CardTitle>
-                  <CardDescription>
-                    Your files have been processed. View the accessibility analysis results below.
-                  </CardDescription>
+                  <CardTitle>Score: {results?.score}/100</CardTitle>
+                  <CardDescription>Accessibility Analysis</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <div className="flex items-center justify-center h-64 border rounded-lg">
-                    <p className="text-muted-foreground">Results will appear here after processing</p>
-                  </div>
+                  <p>{results?.description}</p>
                 </CardContent>
                 <CardFooter className="flex justify-between">
-                  <Button variant="outline" onClick={() => resetAll()}>
-                    Upload New Files
+                  <Button variant="outline" onClick={() => { resetAll(); setTabValue("upload"); }}>
+                    Reupload
                   </Button>
                   <Button>Download Report</Button>
                 </CardFooter>
@@ -351,7 +360,7 @@ export default function UploadPage() {
                 <span className="text-xl font-bold text-primary">1</span>
               </div>
               <h3 className="text-lg font-semibold mb-2">Upload Files</h3>
-              <p className="text-muted-foreground text-sm">Upload your environment and mobility device 3D models.</p>
+              <p className="text-muted-foreground text-sm">Upload your environment (in 3D or image format).</p>
             </div>
             <div className="bg-card/30 backdrop-blur-sm border rounded-lg p-6 shadow-lg hover:shadow-xl transition-all">
               <div className="rounded-full bg-primary/10 p-3 w-12 h-12 flex items-center justify-center mb-4">
@@ -390,6 +399,11 @@ export default function UploadPage() {
           </div>
         </div>
       </footer>
+      {isLoading && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm flex items-center justify-center z-50">
+          <Loader />
+        </div>
+      )}
     </div>
   )
 }

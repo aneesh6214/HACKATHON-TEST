@@ -7,6 +7,7 @@ import PIL.Image
 from werkzeug.utils import secure_filename
 from dotenv import load_dotenv
 import re
+from flask_cors import CORS
 
 # Load environment variables
 load_dotenv()
@@ -14,6 +15,7 @@ GEMINI_API_KEY = os.getenv('API_KEY')
 
 # Initialize Flask app
 app = Flask(__name__)
+CORS(app)
 
 # Allowed extensions
 ALLOWED_EXTENSIONS = {'obj', 'stl', 'cad', 'png', 'jpg', 'jpeg'}
@@ -63,9 +65,10 @@ def upload_file():
             if match:
                 score = int(match.group(1))
                 description = response.text[match.end():].strip()
+                description = re.sub(r'^[\n*]+', '', description)
             else:
                 score = None
-                description = response.text
+                description = re.sub(r'^[\n*]+', '', response.text.strip())
             return jsonify({'score': score, 'description': description}), 200
 
     return jsonify({'error': 'File type not allowed'}), 400
