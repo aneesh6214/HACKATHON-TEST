@@ -210,7 +210,7 @@ export default function UploadPage() {
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2">
                       <Building className="h-5 w-5" />
-                      Environment Upload
+                      Environment Upload (3D or Image)
                     </CardTitle>
                     <CardDescription>Upload a 3D model of your environment</CardDescription>
                   </CardHeader>
