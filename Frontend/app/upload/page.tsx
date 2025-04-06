@@ -209,7 +209,7 @@ export default function UploadPage() {
                       <Building className="h-5 w-5" />
                       Environment Upload
                     </CardTitle>
-                    <CardDescription>Upload a 3D model of the environment you want to analyze</CardDescription>
+                    <CardDescription>Upload a 3D model of your environment</CardDescription>
                   </CardHeader>
                   <CardContent>
                     {!envFileUploaded ? (
