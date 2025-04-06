@@ -146,9 +146,13 @@ export default function Home() {
         </section>
 
         {/* Features Section */}
-        <section
+        {/* <section
           id="features"
           className="w-full min-h-[500px] pt-8 pb-24 md:min-h-[600px] lg:min-h-[700px] bg-black/10 backdrop-blur-sm"
+        > */}
+        <section
+          id="features"
+          className="w-full h-screen pt-8 pb-24 bg-black/10 backdrop-blur-sm"
         >
           <div className="container px-4 md:px-6">
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
@@ -195,9 +199,13 @@ export default function Home() {
         </section>
 
         {/* About Section */}
+        {/* <section
+          id="about"
+          className="w-full min-h-[550px] md:h-[550px] lg:h-[550px] py-0 pt-0 md:py-16 lg:py-32"
+        > */}
         <section
           id="about"
-          className="w-full h-[550px] md:h-[550px] lg:h-[550px] py-0 pt-0 md:py-16 lg:py-32"
+          className="w-full h-screen py-0 pt-0 md:py-16 lg:py-32"
         >
           <div className="container px-4 md:px-6">
             <div className="grid gap-6 lg:grid-cols-2 lg:gap-12">
