@@ -27,6 +27,7 @@ export default function UploadPage() {
   const [envFileName, setEnvFileName] = useState("")
   const [envFileError, setEnvFileError] = useState("")
   const envInputRef = useRef<HTMLInputElement>(null)
+  const [envFileObj, setEnvFileObj] = useState<File | null>(null)
 
   // Device file state
   const [deviceDragActive, setDeviceDragActive] = useState(false)
@@ -82,6 +83,7 @@ export default function UploadPage() {
     if (validateFile(file)) {
       setEnvFileName(file.name)
       setEnvFileUploaded(true)
+      setEnvFileObj(file)
       console.log("Environment file ready for upload:", file)
     } else {
       setEnvFileError("Please upload a valid .STL or .CAD file")
@@ -147,6 +149,7 @@ export default function UploadPage() {
     setEnvFileUploaded(false)
     setEnvFileName("")
     setEnvFileError("")
+    setEnvFileObj(null)
 
     // Reset device file
     setDeviceFileUploaded(false)
@@ -201,9 +204,9 @@ export default function UploadPage() {
               </TabsTrigger>
             </TabsList>
             <TabsContent value="upload">
-              <div className="grid gap-8 md:grid-cols-2">
+              <div className="grid gap-8">
                 {/* Environment Upload */}
-                <Card className="bg-card/30 backdrop-blur-sm border shadow-lg">
+                <Card className="w-full bg-card/30 backdrop-blur-sm border shadow-lg">
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2">
                       <Building className="h-5 w-5" />
@@ -231,7 +234,7 @@ export default function UploadPage() {
                             ref={envInputRef}
                             type="file"
                             className="hidden"
-                            accept=".stl,.cad"
+                            accept=".stl,.obj,.cad,.jpg,.jpeg,.png"
                             onChange={handleEnvChange}
                           />
 
@@ -240,9 +243,9 @@ export default function UploadPage() {
                               <FileUp className="h-6 w-6 text-primary" />
                             </div>
                             <div className="space-y-1">
-                              <h3 className="text-sm font-semibold">Upload environment file</h3>
+                              <h3 className="text-sm font-semibold">Upload Environment (or Image)</h3>
                               <p className="text-xs text-muted-foreground">Drag & drop or click to browse</p>
-                              <p className="text-xs text-muted-foreground">Supported: .STL, .CAD</p>
+                              <p className="text-xs text-muted-foreground">Supported: .STL, .OBJ, .CAD, .JPG, .JPEG, .PNG</p>
                             </div>
                           </div>
                         </div>
@@ -281,107 +284,6 @@ export default function UploadPage() {
                         </Button>
                       </div>
                     )}
-                  </CardContent>
-                </Card>
-
-                {/* Device Upload */}
-                <Card className="bg-card/30 backdrop-blur-sm border shadow-lg">
-                  <CardHeader>
-                    <CardTitle className="flex items-center gap-2">
-                      <Wheelchair className="h-5 w-5" />
-                      Mobility Device Upload
-                    </CardTitle>
-                    <CardDescription>Upload a 3D model of the mobility device</CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    {!deviceFileUploaded ? (
-                      <form
-                        className="flex flex-col items-center"
-                        onDragEnter={handleDeviceDrag}
-                        onSubmit={(e) => e.preventDefault()}
-                      >
-                        <div
-                          className={`w-full h-48 flex flex-col items-center justify-center border-2 border-dashed rounded-lg transition-colors ${
-                            deviceDragActive ? "border-primary bg-primary/5" : "border-muted-foreground/30"
-                          }`}
-                          onDragEnter={handleDeviceDrag}
-                          onDragLeave={handleDeviceDrag}
-                          onDragOver={handleDeviceDrag}
-                          onDrop={handleDeviceDrop}
-                        >
-                          <input
-                            ref={deviceInputRef}
-                            type="file"
-                            className="hidden"
-                            accept=".stl,.cad"
-                            onChange={handleDeviceChange}
-                          />
-
-                          <div className="flex flex-col items-center justify-center space-y-2 p-4 text-center">
-                            <div className="rounded-full bg-primary/10 p-3">
-                              <FileUp className="h-6 w-6 text-primary" />
-                            </div>
-                            <div className="space-y-1">
-                              <h3 className="text-sm font-semibold">Upload device file</h3>
-                              <p className="text-xs text-muted-foreground">Drag & drop or click to browse</p>
-                              <p className="text-xs text-muted-foreground">Supported: .STL, .CAD</p>
-                            </div>
-                          </div>
-                        </div>
-
-                        {deviceFileError && (
-                          <div className="flex items-center mt-2 text-destructive gap-1 text-xs">
-                            <AlertCircle className="h-3 w-3" />
-                            <span>{deviceFileError}</span>
-                          </div>
-                        )}
-
-                        <Button type="button" onClick={onDeviceButtonClick} className="mt-4 w-full" size="sm">
-                          <Upload className="mr-2 h-4 w-4" />
-                          Browse Files
-                        </Button>
-                      </form>
-                    ) : (
-                      <div className="flex flex-col items-center justify-center space-y-4 py-4">
-                        <div className="rounded-full bg-primary/10 p-3">
-                          <CheckCircle2 className="h-6 w-6 text-primary" />
-                        </div>
-                        <div className="text-center space-y-1">
-                          <h3 className="text-sm font-semibold">File Uploaded</h3>
-                          <p className="text-xs text-muted-foreground break-all">{deviceFileName}</p>
-                        </div>
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          onClick={() => {
-                            setDeviceFileUploaded(false)
-                            setDeviceFileName("")
-                          }}
-                          className="mt-2"
-                        >
-                          Change File
-                        </Button>
-                      </div>
-                    )}
-                    <div className="mt-4">
-                      <Label htmlFor="device-type" className="text-sm font-medium mb-1.5 block">
-                        Device Type
-                      </Label>
-                      <Select value={deviceType} onValueChange={setDeviceType}>
-                        <SelectTrigger id="device-type">
-                          <SelectValue placeholder="Select device type" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="wheelchair">Manual Wheelchair</SelectItem>
-                          <SelectItem value="electric-wheelchair">Electric Wheelchair</SelectItem>
-                          <SelectItem value="cane">Cane</SelectItem>
-                          <SelectItem value="walker">Walker</SelectItem>
-                          <SelectItem value="crutches">Crutches</SelectItem>
-                          <SelectItem value="scooter">Mobility Scooter</SelectItem>
-                          <SelectItem value="other">Other</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
                   </CardContent>
                 </Card>
               </div>

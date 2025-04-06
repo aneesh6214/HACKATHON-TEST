@@ -41,7 +41,7 @@ export default function Home() {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
-  const scrollToSection = (e, sectionId) => {
+  const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, sectionId: string) => {
     e.preventDefault()
     const section = document.getElementById(sectionId)
     if (section) {
@@ -137,7 +137,7 @@ export default function Home() {
                   alt="Hero"
                   className="aspect-video overflow-hidden rounded-xl object-cover object-center shadow-lg"
                   height="400"
-                  src="/placeholder.svg?height=550&width=800"
+                  src="/raw.png"
                   width="800"
                 />
               </div>
