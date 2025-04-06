@@ -189,7 +189,7 @@ export default function UploadPage() {
           <div className="text-center mb-8">
             <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Upload Your Files</h1>
             <p className="mt-4 text-muted-foreground md:text-xl max-w-2xl mx-auto">
-              Upload your environment and mobility device files to get started with WheelScore's accessibility analysis.
+              Upload your environment as an STL file or a picture to get started with WheelScore's accessibility analysis.
             </p>
           </div>
 

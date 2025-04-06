@@ -114,10 +114,10 @@ export default function Home() {
               <div className="flex flex-col justify-center space-y-4">
                 <div className="space-y-2">
                   <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none">
-                    Powering the Future of Technology
+                    AI Powered LLM Gemini API Wrapper Wheelchair Score
                   </h1>
                   <p className="max-w-[600px] text-muted-foreground md:text-xl">
-                    Innovative solutions that transform businesses and drive growth in the digital age.
+                    WheelScore is an application that uses the Gemini API to score an image or an STL 3d file based on how wheelchair accessible a space is.
                   </p>
                 </div>
                 <div className="flex flex-col gap-2 min-[400px]:flex-row">
@@ -154,10 +154,10 @@ export default function Home() {
               <div className="space-y-2">
                 <div className="inline-block rounded-lg bg-muted px-3 py-1 text-sm">Features</div>
                 <h2 className="text-3xl font-bold tracking-tighter md:text-4xl pt-7">
-                  How to Navigate
+                  Here's how to get started
                 </h2>
                 <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                  Discover how to get the most out of our website with these helpful navigation tips.
+                  WheelScore is designed to be user-friendly and intuitive. Follow these simple steps to get started:
                 </p>
               </div>
             </div>
@@ -166,7 +166,7 @@ export default function Home() {
                 <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">
                   <Layers className="h-8 w-8 text-primary" />
                 </div>
-                <h3 className="text-xl font-bold">Browse Features</h3>
+                <h3 className="text-xl font-bold">Go to the file upload page</h3>
                 <p className="text-center text-muted-foreground">
                   Use the navigation bar at the top to quickly jump between different sections of our website.
                 </p>
@@ -251,6 +251,9 @@ export default function Home() {
             </Link>
             <Link href="#" className="underline underline-offset-4 hover:text-primary">
               Privacy Policy
+            </Link>
+            <Link href="#" className="underline underline-offset-4 hover:text-primary">
+              Contact Us
             </Link>
           </div>
         </div>
