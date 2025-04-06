@@ -50,7 +50,11 @@ def upload_file():
         if file_ext in {'obj', 'stl', 'cad'}:
             # Generate random score for 3D files
             score = random.randint(0, 100)
-            return jsonify({'score': score}), 200
+            if score < 50:
+                description = "This environment not very wheelchair accessible."
+            if score > 50:
+                description = "This environment is wheelchair accessible."
+            return jsonify({'score': score, 'description': description}), 200
 
         elif file_ext in {'png', 'jpg', 'jpeg'}:
             # Process image with Google Gemini API

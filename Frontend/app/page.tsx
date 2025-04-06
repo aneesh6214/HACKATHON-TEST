@@ -102,6 +102,9 @@ export default function Home() {
                 data-section="about"
               ></span>
             </Link>
+            <Link href="/upload" className="text-sm font-medium transition-colors hover:text-primary relative group">
+              Upload
+            </Link>
           </nav>
         </div>
       </header>
@@ -114,16 +117,16 @@ export default function Home() {
               <div className="flex flex-col justify-center space-y-4">
                 <div className="space-y-2">
                   <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none">
-                    AI Powered LLM Gemini API Wrapper Wheelchair Score
+                    WheelScore: A New Metric for Architects
                   </h1>
                   <p className="max-w-[600px] text-muted-foreground md:text-xl">
-                    WheelScore is an application that uses the Gemini API to score an image or an STL 3d file based on how wheelchair accessible a space is.
+                    Architects provide their designs- WheelScore uses spatial analysis techniques to score and analyze how wheelchair accessible a space is.
                   </p>
                 </div>
                 <div className="flex flex-col gap-2 min-[400px]:flex-row">
                   <Link href="/upload">
-                    <Button size="lg" className="inline-flex items-center gap-2">
-                      Upload your environment / device
+                    <Button size="lg" className="inline-flex items-center gap-2 bg-sky-500 hover:bg-sky-600 text-white">
+                      Upload An Environment
                     </Button>
                   </Link>
                   <Button size="lg" variant="outline">

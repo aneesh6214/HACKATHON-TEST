@@ -25,6 +25,7 @@ export default function UploadPage() {
   const [envFileError, setEnvFileError] = useState("")
   const envInputRef = useRef<HTMLInputElement>(null)
   const [envFileObj, setEnvFileObj] = useState<File | null>(null)
+  const [previewUrl, setPreviewUrl] = useState<string>("")
 
   // Device file state
   const [deviceDragActive, setDeviceDragActive] = useState(false)
@@ -86,6 +87,10 @@ export default function UploadPage() {
       setEnvFileName(file.name)
       setEnvFileUploaded(true)
       setEnvFileObj(file)
+      if (previewUrl) {
+        URL.revokeObjectURL(previewUrl)
+      }
+      setPreviewUrl(URL.createObjectURL(file))
       console.log("Environment file ready for upload:", file)
     } else {
       setEnvFileError("Please upload a valid file.")
@@ -152,6 +157,7 @@ export default function UploadPage() {
     setEnvFileName("")
     setEnvFileError("")
     setEnvFileObj(null)
+    setPreviewUrl("")
 
     // Reset device file
     setDeviceFileUploaded(false)
@@ -336,6 +342,9 @@ export default function UploadPage() {
               </div>
             </TabsContent>
             <TabsContent value="results">
+              {previewUrl && (
+                <img src={previewUrl} alt="Uploaded environment" className="mx-auto mb-4 max-w-md rounded-lg shadow-md" />
+              )}
               <Card className="bg-card/30 backdrop-blur-sm border shadow-lg">
                 <CardHeader>
                   <CardTitle>Score: {results?.score}/100</CardTitle>
@@ -354,7 +363,7 @@ export default function UploadPage() {
             </TabsContent>
           </Tabs>
 
-          <div className="mt-12 grid gap-8 md:grid-cols-3">
+          <div className="mt-12 mb-12 grid gap-8 md:grid-cols-3">
             <div className="bg-card/30 backdrop-blur-sm border rounded-lg p-6 shadow-lg hover:shadow-xl transition-all">
               <div className="rounded-full bg-primary/10 p-3 w-12 h-12 flex items-center justify-center mb-4">
                 <span className="text-xl font-bold text-primary">1</span>
