@@ -10,7 +10,7 @@ import re
 
 # Load environment variables
 load_dotenv()
-GEMINI_API_KEY = 'AIzaSyCoxenFx1l59Llo9Jd-nwuhMmfVMo6gddo'
+GEMINI_API_KEY = os.getenv('API_KEY')
 
 # Initialize Flask app
 app = Flask(__name__)
@@ -22,6 +22,10 @@ ALLOWED_EXTENSIONS = {'obj', 'stl', 'cad', 'png', 'jpg', 'jpeg'}
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+@app.route('/test', methods=['GET', 'POST'])
+def test():
+    return jsonify({'message': 'Hello, World!'}), 200
 
 # Route to handle file uploads
 @app.route('/upload', methods=['POST'])
